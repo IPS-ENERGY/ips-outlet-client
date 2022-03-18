@@ -1,0 +1,306 @@
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+  <edmx:DataServices>
+    <Schema Namespace="IPS.Outlet.ApiModel" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+      <ComplexType Name="PropertyDescriptor">
+        <Property Name="AllowedValueList" Type="Collection(Edm.String)" />
+        <Property Name="AllowedValues" Type="Collection(IPS.Outlet.ApiModel.AllowedPropertyValue)" />
+        <Property Name="AttributeID" Type="Edm.Guid" Nullable="false" />
+        <Property Name="CustomMetaAttributes" Type="Collection(IPS.Outlet.ApiModel.CustomMetaAttribute)" />
+        <Property Name="DefinitionType" Type="IPS.Outlet.ApiModel.PropertyDefinitionType" Nullable="false" />
+        <Property Name="Description" Type="Edm.String" />
+        <Property Name="DisplayName" Type="Edm.String" />
+        <Property Name="EnumTypeId" Type="Edm.Guid" />
+        <Property Name="GroupIndex" Type="Edm.Int32" />
+        <Property Name="GroupName" Type="Edm.String" />
+        <Property Name="GuiReadonly" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="GuiVisible" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="IpsPropertyType" Type="Edm.String" />
+        <Property Name="IsCollection" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="IsCustomProperty" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="IsKey" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="IsNullable" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="MaxLength" Type="Edm.Int32" />
+        <Property Name="Name" Type="Edm.String" />
+        <Property Name="ODataPropertyType" Type="Edm.String" />
+        <Property Name="PropertyIndex" Type="Edm.Int32" />
+        <Property Name="ReadOnly" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="UnitSymbol" Type="Edm.String" />
+        <Property Name="UnitSymbolSwpCode" Type="Edm.String" />
+      </ComplexType>
+      <ComplexType Name="EntityDescriptor">
+        <Property Name="ChildEntityNames" Type="Collection(Edm.String)" />
+        <Property Name="CustomAttributes" Type="Collection(Edm.String)" />
+        <Property Name="CustomMetaAttributes" Type="Collection(IPS.Outlet.ApiModel.CustomMetaAttribute)" />
+        <Property Name="EntityID" Type="Edm.Guid" Nullable="false" />
+        <Property Name="EntityName" Type="Edm.String" />
+        <Property Name="HasEntityset" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="IsReadOnly" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="KeyPropertyNames" Type="Collection(Edm.String)" />
+        <Property Name="Navigations" Type="Collection(Edm.String)" />
+        <Property Name="ParentEntityName" Type="Edm.String" />
+        <Property Name="Properties" Type="Collection(IPS.Outlet.ApiModel.PropertyDescriptor)" />
+        <Property Name="ReportContextualEntityNames" Type="Collection(Edm.String)" />
+        <Property Name="SupportsCustomProperties" Type="Edm.Boolean" Nullable="false" />
+      </ComplexType>
+      <EntityType Name="DownstreamApplication">
+        <Key>
+          <PropertyRef Name="ApplicationId" />
+        </Key>
+        <Property Name="ApplicationId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="RegistrationValid" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="CustomApplicationPrefix" Type="Edm.String" />
+        <Property Name="ApplicationType" Type="IPS.Outlet.ApiModel.ApplicationType" Nullable="false" />
+        <Property Name="InstanceDescription" Type="Edm.String" />
+        <Property Name="InstanceName" Type="Edm.String" Nullable="false" />
+        <Property Name="LanguageCode" Type="Edm.String" />
+        <Property Name="ServiceRoot" Type="Edm.String" />
+        <Property Name="TemporaryDown" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="ValidUntil" Type="Edm.DateTimeOffset" />
+        <NavigationProperty Name="Environments" Type="Collection(IPS.Outlet.ApiModel.DownstreamEnvironment)" />
+      </EntityType>
+      <EntityType Name="DownstreamEnvironment">
+        <Key>
+          <PropertyRef Name="EnvironmentID" />
+        </Key>
+        <Property Name="EnvironmentID" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Description" Type="Edm.String" />
+        <Property Name="Name" Type="Edm.String" Nullable="false" />
+        <Property Name="PathPrefix" Type="Edm.String" Nullable="false" />
+        <Property Name="ValidUntil" Type="Edm.DateTimeOffset" />
+        <NavigationProperty Name="Applications" Type="Collection(IPS.Outlet.ApiModel.DownstreamApplication)" />
+      </EntityType>
+      <ComplexType Name="ItemIndex">
+        <Property Name="Index" Type="Edm.Int32" Nullable="false" />
+        <Property Name="ItemId" Type="Edm.Guid" Nullable="false" />
+      </ComplexType>
+      <ComplexType Name="DescoveryServiceRegistryRecord">
+        <Property Name="IsRegistered" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="LastRegistrationTime" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="RegistrationExpiryTime" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="RegistrationFailMessage" Type="Edm.String" />
+        <Property Name="RegistrationId" Type="Edm.Guid" Nullable="false" />
+      </ComplexType>
+      <ComplexType Name="AllowedPropertyValue">
+        <Property Name="Key" Type="Edm.String" />
+        <Property Name="Value" Type="Edm.String" />
+      </ComplexType>
+      <ComplexType Name="CustomMetaAttribute">
+        <Property Name="Name" Type="Edm.String" />
+        <Property Name="Value" Type="Edm.String" />
+      </ComplexType>
+      <EnumType Name="ApplicationType">
+        <Member Name="Custom" Value="0" />
+        <Member Name="IpsEAM" Value="4" />
+        <Member Name="IpsNMM" Value="7" />
+        <Member Name="IpsMRI" Value="9" />
+        <Member Name="IpsNIOM" Value="10" />
+        <Member Name="IpsOMS" Value="11" />
+      </EnumType>
+      <EnumType Name="PropertyDefinitionType">
+        <Member Name="Standard" Value="0" />
+        <Member Name="Extended" Value="1" />
+        <Member Name="CustomProperty" Value="2" />
+      </EnumType>
+      <Function Name="GetEntityDescriptor" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(IPS.Outlet.ApiModel.DownstreamApplication)" />
+        <ReturnType Type="IPS.Outlet.ApiModel.EntityDescriptor" />
+      </Function>
+      <Function Name="GetEntityDescriptor" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(IPS.Outlet.ApiModel.DownstreamEnvironment)" />
+        <ReturnType Type="IPS.Outlet.ApiModel.EntityDescriptor" />
+      </Function>
+      <Action Name="AddToApplications" IsBound="true">
+        <Parameter Name="bindingParameter" Type="IPS.Outlet.ApiModel.DownstreamEnvironment" />
+        <Parameter Name="targetKey" Type="Edm.Guid" Nullable="false" />
+        <Parameter Name="index" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.OptionalParameter" />
+        </Parameter>
+        <ReturnType Type="Edm.Boolean" Nullable="false" />
+      </Action>
+      <Action Name="AddAllToApplications" IsBound="true">
+        <Parameter Name="bindingParameter" Type="IPS.Outlet.ApiModel.DownstreamEnvironment" />
+        <Parameter Name="targets" Type="Collection(IPS.Outlet.ApiModel.ItemIndex)" />
+        <ReturnType Type="Edm.Int32" Nullable="false" />
+      </Action>
+      <Action Name="RemoveFromApplications" IsBound="true">
+        <Parameter Name="bindingParameter" Type="IPS.Outlet.ApiModel.DownstreamEnvironment" />
+        <Parameter Name="targetKey" Type="Edm.Guid" Nullable="false" />
+        <ReturnType Type="Edm.Boolean" Nullable="false" />
+      </Action>
+      <Action Name="RemoveAllApplications" IsBound="true">
+        <Parameter Name="bindingParameter" Type="IPS.Outlet.ApiModel.DownstreamEnvironment" />
+      </Action>
+      <Action Name="ReindexApplications" IsBound="true">
+        <Parameter Name="bindingParameter" Type="IPS.Outlet.ApiModel.DownstreamEnvironment" />
+        <Parameter Name="orderedTargetKeys" Type="Collection(Edm.Guid)" Nullable="false" />
+      </Action>
+      <Action Name="UpsertRegistration" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(IPS.Outlet.ApiModel.DownstreamApplication)" />
+        <Parameter Name="applicationType" Type="IPS.Outlet.ApiModel.ApplicationType" Nullable="false" />
+        <Parameter Name="applicationName" Type="Edm.String" />
+        <Parameter Name="environmentName" Type="Edm.String" />
+        <Parameter Name="environmentPrefix" Type="Edm.String">
+          <Annotation Term="Org.OData.Core.V1.OptionalParameter" />
+        </Parameter>
+        <Parameter Name="customApplicationPrefix" Type="Edm.String">
+          <Annotation Term="Org.OData.Core.V1.OptionalParameter" />
+        </Parameter>
+        <Parameter Name="applicationLanguageCode" Type="Edm.String">
+          <Annotation Term="Org.OData.Core.V1.OptionalParameter" />
+        </Parameter>
+        <Parameter Name="applicationServiceRoot" Type="Edm.String">
+          <Annotation Term="Org.OData.Core.V1.OptionalParameter" />
+        </Parameter>
+        <Parameter Name="forceApplicationUpdate" Type="Edm.Boolean" Nullable="false">
+          <Annotation Term="Org.OData.Core.V1.OptionalParameter">
+            <Record>
+              <PropertyValue Property="DefaultValue" String="false" />
+            </Record>
+          </Annotation>
+        </Parameter>
+        <Parameter Name="forceEnvironmentUpdate" Type="Edm.Boolean" Nullable="false">
+          <Annotation Term="Org.OData.Core.V1.OptionalParameter">
+            <Record>
+              <PropertyValue Property="DefaultValue" String="false" />
+            </Record>
+          </Annotation>
+        </Parameter>
+        <ReturnType Type="IPS.Outlet.ApiModel.DescoveryServiceRegistryRecord" Nullable="false" />
+      </Action>
+      <EntityContainer Name="OutletContainer">
+        <EntitySet Name="DownstreamApplication" EntityType="IPS.Outlet.ApiModel.DownstreamApplication">
+          <NavigationPropertyBinding Path="Environments" Target="DownstreamEnvironment" />
+        </EntitySet>
+        <EntitySet Name="DownstreamEnvironment" EntityType="IPS.Outlet.ApiModel.DownstreamEnvironment">
+          <NavigationPropertyBinding Path="Applications" Target="DownstreamApplication" />
+        </EntitySet>
+      </EntityContainer>
+    </Schema>
+    <Schema Namespace="IpsVocabulary" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+      <ComplexType Name="AllowedPropertyValue">
+        <Property Name="Key" Type="Edm.String" Nullable="false" />
+        <Property Name="Value" Type="Edm.String" Nullable="false" />
+      </ComplexType>
+      <ComplexType Name="CustomMetaAttribute">
+        <Property Name="Name" Type="Edm.String" Nullable="false" />
+        <Property Name="Value" Type="Edm.String" />
+      </ComplexType>
+      <ComplexType Name="PropertyDescription">
+        <Property Name="Name" Type="Edm.String" Nullable="false">
+          <Annotation Term="Core.Description" String="The property name." />
+        </Property>
+        <Property Name="AttributeID" Type="Edm.Guid" Nullable="false">
+          <Annotation Term="Core.Description" String="The attribute identifier from either visual model or some other referenced model or code." />
+        </Property>
+        <Property Name="Accessible" Type="Edm.Boolean" Nullable="false">
+          <Annotation Term="Core.Description" String="Gets or sets a value indicating whether the property is accessible to this user/client. It strongly correlates to 'IPS-ENERGY™ attribute visibility' feature. NOTE: it is not yet implemented since attribute visibility itself is not yet implemented." />
+        </Property>
+        <Property Name="Calculated" Type="Edm.Boolean" Nullable="false">
+          <Annotation Term="Core.Description" String="Gets or sets a value indicating whether the property is calculated or not. Calculated fields can not be updated. Example are formula fields." />
+        </Property>
+        <Property Name="Description" Type="Edm.String">
+          <Annotation Term="Core.Description" String="Description of the property." />
+        </Property>
+        <Property Name="DisplayName" Type="Edm.String">
+          <Annotation Term="Core.Description" String="Display name (text) for GUI." />
+        </Property>
+        <Property Name="EnumTypeId" Type="Edm.Guid">
+          <Annotation Term="Core.Description" String="The enum type identifier that can be used for getting the info in enumeration type. Example usage: &lt;base_url&gt;/Enumeration/&lt;EnumTypeId&gt;/;" />
+        </Property>
+        <Property Name="GroupIndex" Type="Edm.Int32">
+          <Annotation Term="Core.Description" String="The index of the group the property belongs to. Can be used for grouping and sorting properties in reports or views." />
+        </Property>
+        <Property Name="GroupName" Type="Edm.String">
+          <Annotation Term="Core.Description" String="The name of the group the property belongs to. Can be used for grouping and sorting properties in reports or views." />
+        </Property>
+        <Property Name="GroupShortName" Type="Edm.String">
+          <Annotation Term="Core.Description" String="The short name of the group the property belongs to. If not available, the GroupName will be returned.Can be used for applying custom login on clients." />
+        </Property>
+        <Property Name="MaxLength" Type="Edm.Int32">
+          <Annotation Term="Core.Description" String="The maximum length of the property if it is of string or byte[] (or similar) type. Null if not applicable, no limit exists or is  unknown." />
+        </Property>
+        <Property Name="MaxValue" Type="Edm.Double">
+          <Annotation Term="Core.Description" String="The maximum value of the property value for numeric types. Null if not applicable, no limit exists or is  unknown." />
+        </Property>
+        <Property Name="MinValue" Type="Edm.Double">
+          <Annotation Term="Core.Description" String="The minimum value of the property value for numeric types. Null if not applicable, no limit exists or is  unknown." />
+        </Property>
+        <Property Name="PreferredReadonlyOnGui" Type="Edm.Boolean" Nullable="false">
+          <Annotation Term="Core.Description" String="True if it is preferred to be read-only on GUI; otherwise, false." />
+        </Property>
+        <Property Name="PreferredVisibleOnGui" Type="Edm.Boolean" Nullable="false">
+          <Annotation Term="Core.Description" String="True if it is preferred to be visible on GUI; otherwise, false." />
+        </Property>
+        <Property Name="PropertyIndex" Type="Edm.Int32">
+          <Annotation Term="Core.Description" String="The index of the property that can be use for sorting the  display order (or significance)." />
+        </Property>
+        <Property Name="ReadOnly" Type="Edm.Boolean" Nullable="false">
+          <Annotation Term="Core.Description" String="Indicates whether property is read only." />
+        </Property>
+        <Property Name="IsKey" Type="Edm.Boolean" Nullable="false">
+          <Annotation Term="Core.Description" String="Indicates whether property participates in entity key definition." />
+        </Property>
+        <Property Name="IsCollection" Type="Edm.Boolean" Nullable="false">
+          <Annotation Term="Core.Description" String="If true then the property is a collection, false otherwise." />
+        </Property>
+        <Property Name="Unit" Type="Edm.String">
+          <Annotation Term="Core.Description" String="The unit of measure. Null if not applicable or unknown." />
+        </Property>
+        <Property Name="DefinitionType" Type="IpsVocabulary.PropertyDefinitionType" Nullable="false">
+          <Annotation Term="Core.Description" String="Behavior of the property: standard means it does not need to be specified in $select close explicitly; extended means that needs to be specified in $select close to be part of stream; custom property means that it either must be part of $select close or ips_IncludeCustomProperties query option must be used." />
+        </Property>
+        <Property Name="ValueType" Type="IpsVocabulary.PropertyValueType" Nullable="false">
+          <Annotation Term="Core.Description" String="The type of the property value." />
+        </Property>
+        <Property Name="AllowedValueList" Type="Collection(Edm.String)" Nullable="false">
+          <Annotation Term="Core.Description" String="The list of allowed values. If no such list exists it will be empty (not null)." />
+        </Property>
+        <Property Name="AllowedValues" Type="Collection(IpsVocabulary.AllowedPropertyValue)" Nullable="false">
+          <Annotation Term="Core.Description" String="The list of allowed values. If no such list exists it will be empty (not null)." />
+        </Property>
+        <Property Name="CustomMetaAttributes" Type="Collection(IpsVocabulary.CustomMetaAttribute)" Nullable="false">
+          <Annotation Term="Core.Description" String="The list of custom attributes." />
+        </Property>
+        <Annotation Term="Core.Description" String="Describes one property of the entity in IPS-ENERGY™ specific way. To have this in response include 'ips_IncludeMetadata=Yes' query option in request URL." />
+      </ComplexType>
+      <EnumType Name="PropertyDefinitionType">
+        <Member Name="Standard" Value="0" />
+        <Member Name="Extended" Value="1" />
+        <Member Name="CustomProperty" Value="2" />
+      </EnumType>
+      <EnumType Name="PropertyValueType">
+        <Member Name="Text" Value="0" />
+        <Member Name="Enum" Value="1" />
+        <Member Name="Integer" Value="2" />
+        <Member Name="Double" Value="3" />
+        <Member Name="Date" Value="4" />
+        <Member Name="Table" Value="5" />
+        <Member Name="DateTime" Value="6" />
+        <Member Name="DateTimeOffset" Value="7" />
+        <Member Name="Guid" Value="8" />
+        <Member Name="Currency" Value="9" />
+        <Member Name="Decimal" Value="10" />
+        <Member Name="Boolean" Value="11" />
+        <Member Name="Binary" Value="12" />
+        <Member Name="Memo" Value="13" />
+      </EnumType>
+      <ComplexType Name="EntityDescriptor">
+        <Property Name="EntityID" Type="Edm.Guid" Nullable="false" />
+        <Property Name="HasEntityset" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="IsReadOnly" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="EntityName" Type="Edm.String" Nullable="false" />
+        <Property Name="ParentEntityName" Type="Edm.String" />
+        <Property Name="SupportsCustomProperties" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="ChildEntityNames" Type="Collection(Edm.String)" Nullable="false" />
+        <Property Name="KeyPropertyNames" Type="Collection(Edm.String)" Nullable="false" />
+        <Property Name="CustomAttributes" Type="Collection(Edm.String)" Nullable="false" />
+        <Property Name="Navigations" Type="Collection(Edm.String)" Nullable="false" />
+        <Property Name="ReportContextualEntityNames" Type="Collection(Edm.String)" Nullable="false" />
+        <Property Name="CustomMetaAttributes" Type="Collection(IpsVocabulary.CustomMetaAttribute)" Nullable="false" />
+        <Annotation Term="Core.Description" String="Describes one entity in IPS-ENERGY™ specific way. To have this in response include 'ips_IncludeMetadata=Yes' query option in request URL." />
+      </ComplexType>
+      <Term Name="PropertyDescription" Type="IpsVocabulary.PropertyDescription" AppliesTo="Property NavigationProperty" Nullable="false" />
+      <Term Name="EntityDescription" Type="IpsVocabulary.EntityDescriptor" AppliesTo="Entity" Nullable="false" />
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

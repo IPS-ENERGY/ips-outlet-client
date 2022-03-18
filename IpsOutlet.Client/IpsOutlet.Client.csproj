@@ -1,0 +1,55 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.6.2</Version>
+    <Company>IPS GmbH</Company>
+    <Description>OData client proxy for IPS-ENERGY™ Outlet Web API Service.</Description>
+    <Copyright>Copyright © IPS GmbH 2015-2022</Copyright>
+    <RepositoryUrl>https://nxrepo.ips-energy.com/repository/nuget-hosted/</RepositoryUrl>
+    <PackageTags>IPS-ENERGY, Ips Gmbh, OData, IPS-Outlet</PackageTags>
+    <PackageOutputPath>..\Output\$(Configuration)\NuGetPackages\</PackageOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Connected Services\IpsOutletService\IpsOutletServiceCsdl.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Connected Services\IpsOutletService\IpsOutletServiceCsdl.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.OData.Client" Version="7.10.0" />
+    <PackageReference Include="Microsoft.OData.Core" Version="7.10.0" />
+    <PackageReference Include="Microsoft.OData.Edm" Version="7.10.0" />
+    <PackageReference Include="Microsoft.Spatial" Version="7.10.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageReference Include="System.Text.Json" Version="6.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Connected Services\IpsOutletService\IpsOutletClient.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IpsOutletClient.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Connected Services\IpsOutletService\IpsOutletClient.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IpsOutletClient.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>
